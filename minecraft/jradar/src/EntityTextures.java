@@ -65,7 +65,13 @@ public class EntityTextures
 
 			if(c.getClass() == et.cls)
 			{
-				g.drawTexturedModalRect(x, y, et.X, et.Y, 8, 8);
+				try
+				{
+					g.drawTexturedModalRect(x, y, et.X, et.Y, 8, 8);
+				} catch(Exception e)
+				{
+					//hmmmmm
+				}
 			}
 		}
 	}

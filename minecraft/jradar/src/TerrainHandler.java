@@ -35,29 +35,29 @@ public class TerrainHandler
 	
 	public void drawTopLayer(int centerX, int centerY)
 	{
-		 for(int as = -50; as<50; as++)
+		 for(int as = lowerBound; as<upperBound; as++)
 	        {
 	        	int pX = as;
-	        	for(int aa = -50; aa<50; aa++)
+	        	for(int aa = lowerBound; aa<upperBound; aa++)
 	        	{
-	        		if(aa*aa + as*as > 2500)
+	        		if(aa*aa + as*as > upperBound*upperBound)
 	        		{
-	        			continue;
+	        			continue; //confine radar to a circle using pythagorean theorem
 	        		}
 	        		int pZ = aa;
 	        		
-	        		int bX = (int) (mc.thePlayer.posX + pX);
-	        		int bZ = (int) (mc.thePlayer.posZ + pZ);
-	        		int bY = mc.theWorld.getHeightValue(bX, bZ)-1;
+	        		int bX = (int) (mc.thePlayer.posX + pX); //block posX
+	        		int bZ = (int) (mc.thePlayer.posZ + pZ); //block posZ
+	        		int bY = mc.theWorld.getHeightValue(bX, bZ)-1; //formatted block posY (-1 for compensation)
 	        		
-	        		int bI = mc.theWorld.getBlockId(bX,bY,bZ);
-	    	        double d = mc.theWorld.getWorldChunkManager().getTemperature(bX, bY, bZ);
-	    	        double d1 = mc.theWorld.getWorldChunkManager().getRainfall(bX, bZ);
-	        		int k8 = Block.blocksList[bI].blockIndexInTexture;
+	        		int bI = mc.theWorld.getBlockId(bX,bY,bZ);//block id
+	    	        double d = mc.theWorld.getWorldChunkManager().getTemperature(bX, bY, bZ); //biome info
+	    	        double d1 = mc.theWorld.getWorldChunkManager().getRainfall(bX, bZ); //biome info
+	        		int k8 = Block.blocksList[bI].blockIndexInTexture; //block position in texture
 
-	        		mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/terrain.png"));
+	        		mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/terrain.png")); //binding terrain texture
 	        		
-	        		GL11.glTranslatef(0.5F, 0.5F, 0F);
+	        		GL11.glTranslatef(0.5F, 0.5F, 0F); //compensating for integer restrictions of Minecraft methods
 	        		if(bI == 2)
 	        		{
 	          			//g.drawRect(-pX - 1,-pZ - 1,-pX,-pZ, ColorizerGrass.getGrassColor(d, d1));
