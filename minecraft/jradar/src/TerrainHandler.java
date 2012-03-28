@@ -7,6 +7,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.ColorizerFoliage;
 import net.minecraft.src.ColorizerGrass;
 import net.minecraft.src.Gui;
+import net.minecraft.src.MathHelper;
 
 public class TerrainHandler 
 {
@@ -51,8 +52,10 @@ public class TerrainHandler
 	        		int bY = mc.theWorld.getHeightValue(bX, bZ)-1; //formatted block posY (-1 for compensation)
 	        		
 	        		int bI = mc.theWorld.getBlockId(bX,bY,bZ);//block id
-	    	        double d = mc.theWorld.getWorldChunkManager().getTemperature(bX, bY, bZ); //biome info
-	    	        double d1 = mc.theWorld.getWorldChunkManager().getRainfall(bX, bZ); //biome info
+	        		
+	    	        double d =  MathHelper.clamp_float(mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bY).getFloatTemperature(), 0.0F, 1.0F); //biome info
+	    	        double d1 =  MathHelper.clamp_float(mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bY).getFloatRainfall(), 0.0F, 1.0F); //biome info
+	    	        
 	        		int k8 = Block.blocksList[bI].blockIndexInTexture; //block position in texture
 
 	        		mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/terrain.png")); //binding terrain texture

@@ -23,7 +23,7 @@ public class EntityTextures
 	{
 		textures.add(new EntityTexture(EntityZombie.class, 0, 0));
 		textures.add(new EntityTexture(EntityWolf.class, 8, 0));
-		//textures.add(new EntityTexture(EntityGolem.class, 16, 0));
+		textures.add(new EntityTexture(EntityGolem.class, 16, 0));
 		textures.add(new EntityTexture(EntitySquid.class, 24, 0));
 		textures.add(new EntityTexture(EntitySpider.class, 32, 0));
 		textures.add(new EntityTexture(EntitySnowman.class, 40, 0));
@@ -35,7 +35,7 @@ public class EntityTextures
 		textures.add(new EntityTexture(EntityMooshroom.class, 24, 8));
 		textures.add(new EntityTexture(EntityPigZombie.class, 32, 8));
 		textures.add(new EntityTexture(EntityPig.class, 40, 8));
-		//textures.add(new EntityTexture(EntityYellowCatthign.class, 48, 8));
+		textures.add(new EntityTexture(EntityOcelot.class, 48, 8));
 		
 		textures.add(new EntityTexture(EntityMagmaCube.class, 0, 16));
 		textures.add(new EntityTexture(EntityGhast.class, 8, 16));
