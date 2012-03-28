@@ -45,7 +45,7 @@ public class EntityTextures
 		textures.add(new EntityTexture(EntityCow.class, 40, 16));
 		textures.add(new EntityTexture(EntityChicken.class, 48, 16));
 		
-		textures.add(new EntityTexture(EntityPlayer.class, 0, 24));
+		textures.add(new EntityTexture(EntityOtherPlayerMP.class, 0, 24));
 		textures.add(new EntityTexture(EntityCaveSpider.class, 8, 24));
 		//textures.add(new EntityTexture(EntityGreyCat.class, 16, 24));
 		//textures.add(new EntityTexture(EntityOrangeCat.class, 24, 24));
@@ -74,6 +74,10 @@ public class EntityTextures
 				}
 			}
 		}
+        if(c instanceof EntityPlayer && c != mc.thePlayer)
+        {
+        	g.drawCenteredString(mc.fontRenderer, ((EntityPlayer) c).username, x+4, y-8, 0xffffff);
+        }
 	}
 
 	

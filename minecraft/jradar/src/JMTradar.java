@@ -18,6 +18,7 @@ public class JMTradar
 	private ScaledResolution sr;
 	
 	public static boolean enabled = true;
+	public static boolean entities = true;
 	
 	public JMTradar(int posX, int posY, Minecraft mc, Gui g)
 	{
@@ -40,28 +41,60 @@ public class JMTradar
 	
 	public void drawRadar()
 	{
-		try
-		{
 		GL11.glPushMatrix();
     	GL11.glTranslatef(posX, posY, 0);
     	GL11.glRotatef(-mc.thePlayer.rotationYaw, 0, 0, 1);
-		
-		th.drawTopLayer(0, 0);
-		eh.renderSurroundingEntities(0, 0);
+    	
+        //jg.drawHollowCircle(0, 0, (float)63, 360, (float)3*sr.scaleFactor, 0xff00f000);
+        renderDirections();
+        try
+        {
+			th.drawTopLayer(0, 0);
+			if(entities)
+			{
+				eh.renderSurroundingEntities(0, 0);
+			}
+		}
+		catch(Exception e)
+		{
+		//probably the nether...
+		}		
 		
 		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
-		
+	;
         jg.drawHollowCircle(0, 0, (float)50, 360, (float)3*sr.scaleFactor, 0xff00f000);
         jg.drawIsoscolesTriangle(0, 0, 2, 0, 0xaaffff00);
         jg.drawIsoscolesTriangleOutline(0, 0, 2, 0, 2, 0xffffff00);
         
     	GL11.glTranslatef(-posX, -posY, 0);
         GL11.glPopMatrix();
-		}
-		catch(Exception e)
-		{
-			//probably the nether...
-		}
 	}
 
+	private void renderDirections()
+	{
+		//needs work...lazy method
+		GL11.glTranslatef(0, 56, 0);
+		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
+		g.drawCenteredString(mc.fontRenderer, "N", 0, -4, 0xffffff);
+		GL11.glRotatef(-mc.thePlayer.rotationYaw, 0, 0, 1);
+		GL11.glTranslatef(0, -56, 0);
+		
+		GL11.glTranslatef(56, 0, 0);
+		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
+		g.drawCenteredString(mc.fontRenderer, "E", 0, -4, 0xffffff);
+		GL11.glRotatef(-mc.thePlayer.rotationYaw, 0, 0, 1);
+		GL11.glTranslatef(-56, 0, 0);
+		
+		GL11.glTranslatef(0, -56, 0);
+		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
+		g.drawCenteredString(mc.fontRenderer, "S", 0, -4, 0xffffff);
+		GL11.glRotatef(-mc.thePlayer.rotationYaw, 0, 0, 1);
+		GL11.glTranslatef(0, 56, 0);
+		
+		GL11.glTranslatef(-56, 0, 0);
+		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
+		g.drawCenteredString(mc.fontRenderer, "W", 0, -4, 0xffffff);
+		GL11.glRotatef(-mc.thePlayer.rotationYaw, 0, 0, 1);
+		GL11.glTranslatef(56, 0, 0);
+	}
 }

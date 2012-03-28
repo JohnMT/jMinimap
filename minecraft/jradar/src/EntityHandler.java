@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Gui;
 
 public class EntityHandler 

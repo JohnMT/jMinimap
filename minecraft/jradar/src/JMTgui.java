@@ -101,9 +101,9 @@ public class JMTgui
             GL11.glVertex2d(cx + x, cy + y);
         }
         GL11.glEnd();
-        GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
         
         /*
         float f = (float) (c >> 24 & 0xff) / 255F;
