@@ -32,8 +32,8 @@ public class EntityHandler
         	}
         	EntityLiving ent = (EntityLiving) mc.theWorld.loadedEntityList.get(as);
 
-        	int xx = (int) (mc.thePlayer.posX - ent.posX);
-        	int zz = (int) (mc.thePlayer.posZ - ent.posZ);
+        	double xx =  (mc.thePlayer.posX - ent.posX);
+        	double zz =  (mc.thePlayer.posZ - ent.posZ);
         	
         	if(xx*xx + zz*zz > radius*radius)
         	{
@@ -42,7 +42,7 @@ public class EntityHandler
         	
         	GL11.glColor4f(255, 255, 255, 255);
             GL11.glPushMatrix();
-            GL11.glTranslatef(centerX + xx, centerY + zz, 0);
+            GL11.glTranslated(centerX + xx, centerY + zz, 0);
             GL11.glRotatef(mc.thePlayer.rotationYaw, 0,0,1);
             GL11.glScalef(0.5F, 0.5F, 0);
             
@@ -50,7 +50,7 @@ public class EntityHandler
         	//g.drawTexturedModalRect(-4, -4, 0, 0, 8, 8);
             
         	GL11.glScalef(2, 2, 0);
-        	GL11.glTranslatef(-xx, -zz, 0);
+        	GL11.glTranslated(-xx, -zz, 0);
         	GL11.glPopMatrix();
         	
         }
