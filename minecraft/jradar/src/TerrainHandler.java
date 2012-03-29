@@ -36,6 +36,8 @@ public class TerrainHandler
 	
 	public void drawTopLayer(int centerX, int centerY)
 	{
+		mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/terrain.png")); //binding terrain texture
+		
 		 for(int as = lowerBound; as<upperBound; as++)
 	        {
 	        	int pX = as;
@@ -57,8 +59,6 @@ public class TerrainHandler
 	    	        double d1 =  MathHelper.clamp_float(mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bY).getFloatRainfall(), 0.0F, 1.0F); //biome info
 	    	        
 	        		int k8 = Block.blocksList[bI].blockIndexInTexture; //block position in texture
-
-	        		mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/terrain.png")); //binding terrain texture
 	        		
 	        		GL11.glTranslatef(0.5F, 0.5F, 0F); //compensating for integer restrictions of Minecraft methods
 	        		if(bI == 2)
