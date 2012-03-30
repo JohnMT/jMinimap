@@ -19,6 +19,7 @@ public class JMTradar
 	
 	public static boolean enabled = true;
 	public static boolean entities = true;
+	public static boolean terrain = true;
 	
 	public JMTradar(int posX, int posY, Minecraft mc, Gui g)
 	{
@@ -49,7 +50,10 @@ public class JMTradar
         renderDirections();
         try
         {
-			th.drawTopLayer(0, 0);
+        	if(terrain)
+        	{
+        		th.drawTopLayer(0, 0);
+        	}
 			if(entities)
 			{
 				eh.renderSurroundingEntities(0, 0);
@@ -62,7 +66,7 @@ public class JMTradar
 		
 		GL11.glRotatef(mc.thePlayer.rotationYaw, 0, 0, 1);
 	;
-        jg.drawHollowCircle(0, 0, (float)50, 360, (float)3*sr.scaleFactor, 0xff00f000);
+        jg.drawHollowCircle(0, 0, (float)50, 360, (float)4*sr.scaleFactor, 0xff00f000);
         jg.drawIsoscolesTriangle(0, 0, 2, 0, 0xaaffff00);
         jg.drawIsoscolesTriangleOutline(0, 0, 2, 0, 2, 0xffffff00);
         

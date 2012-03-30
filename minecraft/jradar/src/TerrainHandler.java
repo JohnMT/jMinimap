@@ -43,10 +43,6 @@ public class TerrainHandler
 	        	int pX = as;
 	        	for(int aa = lowerBound; aa<upperBound; aa++)
 	        	{
-	        		if(aa*aa + as*as > upperBound*upperBound)
-	        		{
-	        			continue; //confine radar to a circle using pythagorean theorem
-	        		}
 	        		int pZ = aa;
 	        		
 	        		int bX = (int) (mc.thePlayer.posX + pX); //block posX
@@ -58,34 +54,29 @@ public class TerrainHandler
 	    	        double d =  MathHelper.clamp_float(mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bY).getFloatTemperature(), 0.0F, 1.0F); //biome info
 	    	        double d1 =  MathHelper.clamp_float(mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bY).getFloatRainfall(), 0.0F, 1.0F); //biome info
 	    	        
+	    	        double disx = mc.thePlayer.posX-bX;
+	    	        double disz = mc.thePlayer.posZ-bZ;
+	    	        
+	    	        if((disx - 0.5)*(disx - 0.5) + (disz - 0.5)*(disz - 0.5) > (upperBound)*(upperBound))
+	    	        {
+	    	        	continue;
+	    	        }
 	        		int k8 = Block.blocksList[bI].blockIndexInTexture; //block position in texture
 	        		
-	        		GL11.glTranslatef(0.5F, 0.5F, 0F); //compensating for integer restrictions of Minecraft methods
 	        		if(bI == 2)
 	        		{
-	          			//g.drawRect(-pX - 1,-pZ - 1,-pX,-pZ, ColorizerGrass.getGrassColor(d, d1));
-	          			
 	          			colorBasedOnMultiplier(ColorizerGrass.getGrassColor(d, d1));          			
-	          			g.drawTexturedModalRect(-pX - 1, -pZ - 1, k8 % 16 << 4, (k8 >> 4) << 4, 1, 1);
 	        		} else if(bI == 18)
 	        		{
-	        			//g.drawRect(-pX - 1,-pZ - 1,-pX,-pZ, ColorizerFoliage.getFoliageColor(d, d1));
-	        			
 	          			colorBasedOnMultiplier(ColorizerFoliage.getFoliageColor(d, d1));
-	          			g.drawTexturedModalRect(-pX - 1, -pZ - 1, k8 % 16 << 4, (k8 >> 4) << 4, 1, 1);
 	        		} else if(bI == 8 || bI == 9)
-	        		{
-	        			//g.drawRect(-pX - 1,-pZ - 1,-pX,-pZ, mc.theWorld.getWorldChunkManager().getBiomeGenAt(bX, bZ).waterColorMultiplier * 0xffffffff);
-	        			//g.drawRect(-pX - 1,-pZ - 1,-pX,-pZ, 0xff000fff);
-	        			
+	        		{	        			
 	        			colorBasedOnMultiplier(0xff000fff);
-	          			g.drawTexturedModalRect(-pX - 1, -pZ - 1, k8 % 16 << 4, (k8 >> 4) << 4, 1, 1);
 	        		} else
 	        		{
 	        			GL11.glColor4f(255, 255, 255, 255);
-	            		g.drawTexturedModalRect(-pX - 1, -pZ - 1, k8 % 16 << 4, (k8 >> 4) << 4, 1, 1);
 	        		}
-	        		GL11.glTranslatef(-0.5F, -0.5F, 0F);
+	        		g.drawTexturedModalRect(disx - 1, disz - 1, k8 % 16 << 4, (k8 >> 4) << 4, 1, 1);
 	        	}
 	        }
 	}
